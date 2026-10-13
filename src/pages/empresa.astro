@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { industrias } from '../data/site';
+
+const pilares = [
+  {
+    titulo: 'Equipos de primeras marcas',
+    texto:
+      'Trabajamos con equipos de las marcas líderes del mercado, con instalaciones pensadas para procesos repetibles y controlados.',
+  },
+  {
+    titulo: 'Personal capacitado',
+    texto:
+      'Nuestro equipo técnico recibe capacitación y soporte continuo de los representantes locales de esas marcas, para estar al día con cada proceso.',
+  },
+  {
+    titulo: 'Conocimiento de cada aplicación',
+    texto:
+      'Conocemos cómo trabajan las piezas en los principales sectores industriales. Eso nos permite elegir el recubrimiento correcto para cada caso.',
+  },
+];
+---
+<Base title="Empresa" description="ECODUR S.A.: más de 12 años en metalización por proyección térmica, soldaduras especiales y hardfacing. Planta de 650 m² en el Parque Industrial de Olavarría.">
+  <div class="wrap page-head">
+    <h1>Nuestra empresa</h1>
+    <p class="lead">
+      Hace más de 12 años que reparamos y fabricamos componentes mecánicos en el mercado metalúrgico,
+      con metalización por proyección, soldaduras especiales y hardfacing.
+    </p>
+  </div>
+
+  <section class="wrap intro">
+    <div class="photo intro__photo">
+      <img src="/img/taller-torno.jpg" alt="Personal de Ecodur trabajando en el torno de gran porte" width="1024" height="576" />
+    </div>
+    <div class="intro__text">
+      <h2>Valor agregado sobre cada pieza</h2>
+      <p>
+        Nuestra propuesta es simple: tomar un componente gastado, o fabricar uno nuevo, y aplicarle el recubrimiento
+        que lo haga durar más. Trabajamos con recubrimientos metálicos, no metálicos, cerámicos y cermet.
+      </p>
+      <p>
+        La planta, de 650 m² cubiertos, está en el Parque Industrial de Olavarría. Ahí tenemos los equipos de
+        proyección térmica, soldadura y mecanizado para recibir la pieza, recuperarla y entregarla con sus medidas
+        y su rugosidad certificadas.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Por qué ECODUR</h2>
+      </div>
+      <div class="pilares">
+        {pilares.map((p) => (
+          <article>
+            <h3>{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap industrias">
+      <div>
+        <h2>Sectores que atendemos</h2>
+        <p class="lead industrias__lead">Nuestros recubrimientos se usan en industrias donde una pieza parada cuesta caro.</p>
+      </div>
+      <ul class="ticks industrias__list">
+        {industrias.map((i) => <li>{i}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .intro {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+    padding-bottom: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  .intro__photo {
+    aspect-ratio: 16 / 10;
+  }
+
+  .intro__text {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .intro__text h2 {
+    margin-bottom: 0.25rem;
+  }
+
+  .pilares {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .pilares article {
+    border-top: 2px solid var(--ink);
+    padding-top: 1.25rem;
+  }
+
+  .pilares p {
+    margin-top: 0.9rem;
+    color: var(--steel);
+  }
+
+  .industrias {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 4rem;
+  }
+
+  .industrias__lead {
+    margin-top: 1.25rem;
+  }
+
+  .industrias__list {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 2rem;
+    font-size: var(--step-1);
+  }
+
+  @media (max-width: 56rem) {
+    .intro,
+    .industrias {
+      grid-template-columns: 1fr;
+    }
+    .pilares {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .industrias__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

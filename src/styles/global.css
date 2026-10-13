@@ -1,0 +1,299 @@
+/* ECODUR — estilos globales
+   Paleta: acero claro + grafito, con el rojo de la marca como único acento.
+   Tipografía: Archivo (variable en ancho y peso). Titulares condensados, texto en ancho normal. */
+
+:root {
+  --paper: #f1f2f0;
+  --surface: #ffffff;
+  --plate: #e4e7e6;
+  --ink: #1c2125;
+  --graphite: #262c31;
+  --steel: #59636b;
+  --rule: #c9ced0;
+  --red: #e30613;
+  --red-strong: #c70510;
+
+  --font: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --narrow: 64%;
+  --semi: 82%;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: clamp(2rem, 4.2vw, 2.9rem);
+  --step-4: clamp(2.6rem, 7vw, 5.4rem);
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --max: 76rem;
+  --radius: 2px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--red-strong);
+}
+
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.005em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+
+h2 {
+  font-size: var(--step-3);
+}
+
+h3 {
+  font-size: var(--step-2);
+  line-height: 1.05;
+}
+
+p {
+  margin: 0;
+  max-width: 64ch;
+  text-wrap: pretty;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--steel);
+}
+
+.muted {
+  color: var(--steel);
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+
+.skip:focus {
+  left: 0;
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.4rem;
+  border: 2px solid var(--red-strong);
+  border-radius: var(--radius);
+  background: var(--red-strong);
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn:hover {
+  background: #a5040d;
+  border-color: #a5040d;
+  color: #fff;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn--ghost:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.btn--light {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.btn--light:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+}
+
+/* Encabezado de página interior: título grande + la regla roja del material institucional */
+.page-head {
+  padding-block: clamp(3rem, 8vw, 6rem) clamp(2rem, 4vw, 3rem);
+}
+
+.page-head h1 {
+  padding-bottom: 1.25rem;
+  border-bottom: 4px solid var(--red);
+  margin-bottom: 1.5rem;
+}
+
+.section {
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+
+.section + .section {
+  border-top: 1px solid var(--rule);
+}
+
+.section__head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+/* Lecturas: valores medidos, el elemento distintivo del sitio */
+.readout {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.readout__value {
+  font-stretch: var(--narrow);
+  font-weight: 750;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.readout__label {
+  font-size: var(--step--1);
+  color: var(--steel);
+}
+
+/* Fichas de datos (dato / valor) */
+.spec {
+  display: grid;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.spec > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.8fr) 1.2fr;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.spec dt {
+  color: var(--steel);
+  font-size: var(--step--1);
+  padding-top: 0.15rem;
+}
+
+.spec dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Listas con tilde de marca */
+.ticks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.ticks li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.ticks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.65rem;
+  height: 0.65rem;
+  background: var(--red);
+  transform: skewX(-12deg);
+}
+
+.photo {
+  background: var(--plate);
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

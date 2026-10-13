@@ -1,0 +1,162 @@
+---
+import Logo from './Logo.astro';
+import { nav } from '../data/site';
+
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="header">
+  <div class="wrap header__bar">
+    <a href="/" class="header__home" aria-label="ECODUR, ir al inicio">
+      <Logo />
+    </a>
+
+    <button class="header__toggle" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="header__toggle-lines" aria-hidden="true"></span>
+      <span class="header__toggle-text">Menú</span>
+    </button>
+
+    <nav id="menu" class="header__nav" aria-label="Principal">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+        <li class="header__cta">
+          <a href="/contacto" class="btn" aria-current={current === '/contacto' ? 'page' : undefined}>Contacto</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.header__toggle');
+  const menu = document.getElementById('menu');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    menu?.classList.toggle('is-open', !open);
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--surface);
+    border-bottom: 3px solid var(--red);
+  }
+
+  .header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4.5rem;
+    padding-block: 0.5rem;
+  }
+
+  .header__home {
+    text-decoration: none;
+    display: block;
+  }
+
+  .header__nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2.25rem);
+  }
+
+  .header__nav a:not(.btn) {
+    text-decoration: none;
+    font-weight: 600;
+    padding-block: 0.5rem;
+    border-bottom: 2px solid transparent;
+  }
+
+  .header__nav a:not(.btn):hover,
+  .header__nav a[aria-current='page']:not(.btn) {
+    color: var(--ink);
+    border-bottom-color: var(--red);
+  }
+
+  .header__cta .btn {
+    min-height: 2.6rem;
+    padding: 0.45rem 1.1rem;
+  }
+
+  .header__toggle {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0 0.9rem;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    background: transparent;
+    font: inherit;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .header__toggle-lines {
+    width: 1.1rem;
+    height: 2px;
+    background: currentColor;
+    box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
+  }
+
+  @media (max-width: 52rem) {
+    .header__toggle {
+      display: inline-flex;
+    }
+
+    .header__nav {
+      display: none;
+      position: absolute;
+      inset: 100% 0 auto 0;
+      background: var(--surface);
+      border-bottom: 3px solid var(--red);
+      box-shadow: 0 12px 24px rgb(28 33 37 / 0.12);
+    }
+
+    .header__nav.is-open {
+      display: block;
+    }
+
+    .header__nav ul {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0.5rem var(--gutter) 1.25rem;
+    }
+
+    .header__nav a:not(.btn) {
+      display: block;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 1.15rem;
+    }
+
+    .header__nav a[aria-current='page']:not(.btn) {
+      border-bottom-color: var(--rule);
+      color: var(--red-strong);
+    }
+
+    .header__cta {
+      margin-top: 1rem;
+    }
+
+    .header__cta .btn {
+      width: 100%;
+      justify-content: center;
+      min-height: 3rem;
+    }
+  }
+</style>

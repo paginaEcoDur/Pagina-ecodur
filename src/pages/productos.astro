@@ -1,0 +1,190 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { productos, otrasLineas, materiales } from '../data/productos';
+---
+<Base title="Productos" description="Líneas de recubrimiento ECODUR: HCR (reemplazo de cromo duro), WCM, Rebuild, C276 Plus, Gripping Hard, Ultra Hard y Babbitt. Fichas con dureza, adherencia y acabado.">
+  <div class="wrap page-head">
+    <h1>Líneas de recubrimiento</h1>
+    <p class="lead">
+      Tenemos más de 100 materiales para seleccionar, combinar y aplicar. Estas son nuestras líneas propias,
+      con los datos técnicos de cada una.
+    </p>
+    <nav class="indice" aria-label="Líneas">
+      <ul>
+        {productos.map((p) => <li><a href={`#${p.id}`}>{p.nombre}</a></li>)}
+        <li><a href="#materiales">Otros materiales</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  {productos.map((p) => (
+    <section class="producto" id={p.id}>
+      <div class="wrap producto__grid">
+        <div class="producto__main">
+          <p class="producto__uso">{p.uso}</p>
+          <h2>{p.nombre}</h2>
+          <p class="producto__desc">{p.descripcion}</p>
+
+          <h3 class="producto__sub">Prestaciones</h3>
+          <ul class="ticks">
+            {p.prestaciones.map((x) => <li>{x}</li>)}
+          </ul>
+
+          {p.aplicaciones && (
+            <>
+              <h3 class="producto__sub">Dónde se usa</h3>
+              <p>{p.aplicaciones}</p>
+            </>
+          )}
+        </div>
+
+        <aside class="producto__side">
+          {p.imagen && (
+            <div class="photo producto__photo">
+              <img src={p.imagen.src} alt={p.imagen.alt} loading="lazy" />
+            </div>
+          )}
+          <h3 class="producto__sub">Ficha técnica</h3>
+          <dl class="spec">
+            {p.ficha.map((f) => (
+              <div>
+                <dt>{f.dato}</dt>
+                <dd>{f.valor}</dd>
+              </div>
+            ))}
+          </dl>
+        </aside>
+      </div>
+    </section>
+  ))}
+
+  <section class="section materiales" id="materiales">
+    <div class="wrap materiales__grid">
+      <div>
+        <h2>Otros materiales</h2>
+        <p class="lead materiales__lead">
+          Además de las líneas propias, aplicamos materiales estándar y los combinamos según el servicio de la pieza.
+        </p>
+      </div>
+      <div>
+        <h3 class="producto__sub">Materiales estándar</h3>
+        <ul class="ticks cols">
+          {materiales.map((m) => <li>{m}</li>)}
+        </ul>
+        <h3 class="producto__sub">Otras líneas ECODUR</h3>
+        <ul class="ticks cols">
+          {otrasLineas.map((m) => <li>{m}</li>)}
+        </ul>
+        <p class="muted materiales__nota">Consúltenos por la ficha técnica de cualquiera de estos materiales.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="¿No sabe qué recubrimiento necesita?" text="Cuéntenos qué pieza es, en qué condiciones trabaja y cómo se gasta. Le recomendamos el material y el proceso." />
+</Base>
+
+<style>
+  .indice ul {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .indice a {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--surface);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .indice a:hover {
+    border-color: var(--red);
+  }
+
+  .producto {
+    padding-block: clamp(3rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--rule);
+  }
+
+  .producto:nth-of-type(odd) {
+    background: var(--surface);
+  }
+
+  .producto__grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  .producto__uso {
+    font-weight: 650;
+    color: var(--red-strong);
+    margin-bottom: 0.5rem;
+  }
+
+  .producto__desc {
+    margin-top: 1.25rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  .producto__sub {
+    font-size: 1rem;
+    font-stretch: 100%;
+    font-weight: 700;
+    margin: 2rem 0 0.8rem;
+  }
+
+  .producto__side .producto__sub {
+    margin-top: 1.5rem;
+  }
+
+  .producto__photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .materiales__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 2rem 4rem;
+  }
+
+  .materiales__grid .producto__sub:first-child {
+    margin-top: 0;
+  }
+
+  .materiales__lead {
+    margin-top: 1.25rem;
+  }
+
+  .cols {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+
+  .materiales__nota {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 56rem) {
+    .producto__grid,
+    .materiales__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

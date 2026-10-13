@@ -1,0 +1,243 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+// Clave de Web3Forms (gratis en web3forms.com, se crea con el mail que recibe los mensajes).
+// Se configura como variable de entorno PUBLIC_WEB3FORMS_KEY en Cloudflare Pages.
+// Si no está configurada, la página muestra solo los mails.
+const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined;
+const mapa = `https://www.google.com/maps?q=${encodeURIComponent(site.mapaQuery)}&output=embed`;
+---
+<Base title="Contacto" description="Contacto de ECODUR S.A., Parque Industrial de Olavarría. Envíenos fotos y medidas de su pieza para recibir un diagnóstico.">
+  <div class="wrap page-head">
+    <h1>Contacto</h1>
+    <p class="lead">
+      Para cotizar una reparación, mándenos fotos de la pieza, sus medidas y en qué condiciones trabaja.
+      Le respondemos con el diagnóstico y la solución que recomendamos.
+    </p>
+  </div>
+
+  <section class="wrap contacto">
+    <div class="contacto__datos">
+      <h2>Escríbanos</h2>
+      <ul class="datos">
+        {site.emails.map((e) => (
+          <li><a href={`mailto:${e}`}>{e}</a></li>
+        ))}
+        {site.telefono && <li><a href={`tel:${site.telefono.replace(/\s/g, '')}`}>{site.telefono}</a></li>}
+        {site.whatsapp && <li><a href={`https://wa.me/${site.whatsapp}`}>WhatsApp</a></li>}
+      </ul>
+
+      <h2 class="contacto__sub">Dónde estamos</h2>
+      <p>{site.direccion}<br />{site.ciudad}</p>
+      <div class="mapa">
+        <iframe
+          src={mapa}
+          title="Mapa: ubicación de ECODUR en el Parque Industrial de Olavarría"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+
+    {formKey ? (
+      <form class="form" action="https://api.web3forms.com/submit" method="POST" id="form-contacto">
+        <h2>Consulta por una pieza</h2>
+        <input type="hidden" name="access_key" value={formKey} />
+        <input type="hidden" name="subject" value="Consulta desde ecodur.com.ar" />
+        <input type="hidden" name="from_name" value="Web ECODUR" />
+        <input type="checkbox" name="botcheck" class="trampa" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="campo">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" name="nombre" type="text" autocomplete="name" required />
+        </div>
+        <div class="campo">
+          <label for="empresa">Empresa <span class="opcional">(opcional)</span></label>
+          <input id="empresa" name="empresa" type="text" autocomplete="organization" />
+        </div>
+        <div class="fila">
+          <div class="campo">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="campo">
+            <label for="telefono">Teléfono <span class="opcional">(opcional)</span></label>
+            <input id="telefono" name="telefono" type="tel" autocomplete="tel" />
+          </div>
+        </div>
+        <div class="campo">
+          <label for="mensaje">¿Qué pieza es y cómo se gasta?</label>
+          <textarea id="mensaje" name="mensaje" rows="6" required placeholder="Ej.: vástago de cilindro hidráulico, Ø 80 mm, cromo saltado en la zona del retén."></textarea>
+        </div>
+        <p class="muted form__ayuda">Si tiene fotos, puede mandarlas después por mail a {site.emails[0]}.</p>
+        <button class="btn" type="submit">Enviar consulta</button>
+        <p class="form__estado" role="status" aria-live="polite"></p>
+      </form>
+    ) : (
+      <div class="form form--sin-clave">
+        <h2>Consulta por una pieza</h2>
+        <p>Escríbanos a <a href={`mailto:${site.emails[0]}`}>{site.emails[0]}</a> con:</p>
+        <ul class="ticks">
+          <li>Qué pieza es y de qué equipo</li>
+          <li>Medidas y material, si los tiene</li>
+          <li>Fotos de la zona gastada</li>
+          <li>En qué condiciones trabaja: temperatura, fluidos, carga</li>
+        </ul>
+        <a class="btn" href={`mailto:${site.emails[0]}?subject=Consulta%20desde%20la%20web`}>Escribir un mail</a>
+      </div>
+    )}
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('form-contacto') as HTMLFormElement | null;
+  const estado = form?.querySelector<HTMLElement>('.form__estado');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (btn) btn.disabled = true;
+    if (estado) estado.textContent = 'Enviando consulta…';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message);
+      form.reset();
+      if (estado) estado.textContent = 'Consulta enviada. Le respondemos por mail a la brevedad.';
+    } catch {
+      if (estado) estado.textContent = 'No se pudo enviar la consulta. Pruebe de nuevo o escríbanos directamente por mail.';
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .contacto {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+    padding-bottom: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  .contacto h2 {
+    font-size: var(--step-2);
+  }
+
+  .contacto__sub {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .datos {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+    font-size: var(--step-1);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  .mapa {
+    margin-top: 1.25rem;
+    aspect-ratio: 4 / 3;
+    background: var(--plate);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .mapa iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .form {
+    display: grid;
+    gap: 1.1rem;
+    background: var(--surface);
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+    border-top: 4px solid var(--red);
+  }
+
+  .form--sin-clave {
+    justify-items: start;
+  }
+
+  .fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+
+  .campo {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .opcional {
+    font-weight: 400;
+    color: var(--steel);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    padding: 0.7rem 0.8rem;
+    border: 1px solid #9aa3a9;
+    border-radius: var(--radius);
+    background: #fff;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: 3px solid var(--red);
+    outline-offset: 0;
+    border-color: var(--ink);
+  }
+
+  textarea::placeholder {
+    color: #7c868d;
+  }
+
+  .trampa {
+    display: none;
+  }
+
+  .form__ayuda {
+    font-size: var(--step--1);
+  }
+
+  .form .btn {
+    justify-self: start;
+  }
+
+  .form__estado {
+    font-weight: 600;
+    min-height: 1.5em;
+  }
+
+  @media (max-width: 56rem) {
+    .contacto {
+      grid-template-columns: 1fr;
+    }
+    .form {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .fila {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

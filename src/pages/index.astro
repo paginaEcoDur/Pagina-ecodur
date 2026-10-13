@@ -1,0 +1,502 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { productos } from '../data/productos';
+import { industrias } from '../data/site';
+
+const procesos = [
+  {
+    nombre: 'Metalización por proyección térmica',
+    texto: 'Aplicamos metales, cerámicos y carburos con HVOF y arco eléctrico. La pieza se mantiene fría, así que no se deforma ni cambia su metalurgia.',
+  },
+  {
+    nombre: 'Soldaduras especiales',
+    texto: 'Reparaciones con aleaciones especiales para piezas que necesitan una unión metalúrgica con el material base.',
+  },
+  {
+    nombre: 'Hardfacing',
+    texto: 'Recargue duro sobre zonas expuestas a abrasión e impacto, para que la pieza dure más que la original.',
+  },
+];
+
+const mejoras = [
+  'Resistencia a la abrasión',
+  'Reconstrucción dimensional sin cambiar el material base',
+  'Resistencia a la erosión',
+  'Resistencia a la corrosión',
+  'Resistencia a la cavitación',
+  'Resistencia a la tribocorrosión',
+  'Aislación térmica y eléctrica',
+];
+
+// Lecturas del vástago CAT 773G (antes con cromo duro / después con ECODUR HCR)
+const lecturas = [
+  { dato: 'Rugosidad Ra', unidad: 'µm', antes: 0.041, despues: 0.024, escala: 0.045, nota: 'menos es mejor' },
+  { dato: 'Espesor de la capa', unidad: 'mm', antes: 0.183, despues: 0.3, escala: 0.32, nota: 'más material para desgastar' },
+];
+const fmt = (n: number) => n.toLocaleString('es-AR', { minimumFractionDigits: n < 0.1 ? 3 : 2 });
+---
+<Base>
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <h1>Le devolvemos la medida a sus piezas y les damos más vida útil.</h1>
+        <p class="lead">
+          ECODUR repara y fabrica componentes mecánicos con recubrimientos metálicos, cerámicos y cermet.
+          Metalización por proyección térmica, soldaduras especiales y hardfacing para la industria.
+        </p>
+        <div class="hero__actions">
+          <a class="btn" href="/contacto">Pedir una consulta</a>
+          <a class="btn btn--ghost" href="/trabajos">Ver trabajos realizados</a>
+        </div>
+      </div>
+      <figure class="hero__figure">
+        <div class="photo hero__photo">
+          <img src="/img/taller-torno.jpg" alt="Inducido de 5000 kg montado en el torno de Ecodur" width="1024" height="576" fetchpriority="high" />
+        </div>
+        <figcaption>Restauración de los apoyos de un inducido de 5000 kg en nuestra planta.</figcaption>
+      </figure>
+    </div>
+
+    <div class="wrap">
+      <dl class="facts">
+        <div><dt>Planta propia</dt><dd>650 m² cubiertos en el Parque Industrial de Olavarría</dd></div>
+        <div><dt>Experiencia</dt><dd>Más de 12 años en el mercado metalúrgico</dd></div>
+        <div><dt>Materiales</dt><dd>Más de 100 para seleccionar, combinar y aplicar</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Qué hacemos</h2>
+      </div>
+      <div class="procesos">
+        {procesos.map((p) => (
+          <article class="proceso">
+            <h3>{p.nombre}</h3>
+            <p>{p.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section medido">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Lo medimos antes de entregarlo</h2>
+        <p class="lead">
+          Vástago de amortiguador trasero de un camión CAT 773G. Llegó con el cromo duro dañado; lo entregamos en 3 días
+          con ECODUR HCR, rectificado a medida OEM y rugosidad certificada.
+        </p>
+      </div>
+
+      <div class="medido__grid">
+        <div class="medido__fotos">
+          <figure>
+            <div class="photo"><img src="/img/vastago-antes.jpg" alt="Vástago antes de la reparación, con el cromo dañado" width="302" height="536" loading="lazy" /></div>
+            <figcaption>Antes: cromo duro dañado</figcaption>
+          </figure>
+          <figure>
+            <div class="photo"><img src="/img/vastago-despues.jpg" alt="Vástago terminado con ECODUR HCR, superficie espejada" width="400" height="545" loading="lazy" /></div>
+            <figcaption>Después: ECODUR HCR superpulido</figcaption>
+          </figure>
+        </div>
+
+        <div class="medido__lecturas">
+          {lecturas.map((l) => (
+            <div class="medida">
+              <h3 class="medida__titulo">{l.dato} <span class="muted">({l.nota})</span></h3>
+              <div class="medida__fila">
+                <span class="medida__nombre">Cromo duro original</span>
+                <span class="medida__barra" style={`--v:${l.antes / l.escala}`}><span></span></span>
+                <span class="medida__valor">{fmt(l.antes)} {l.unidad}</span>
+              </div>
+              <div class="medida__fila medida__fila--ecodur">
+                <span class="medida__nombre">ECODUR HCR</span>
+                <span class="medida__barra" style={`--v:${l.despues / l.escala}`}><span></span></span>
+                <span class="medida__valor">{fmt(l.despues)} {l.unidad}</span>
+              </div>
+            </div>
+          ))}
+          <p class="muted medido__nota">
+            Una superficie más lisa desgasta menos los retenes y sellos. Una capa más gruesa y densa tarda más en gastarse
+            y protege mejor contra la corrosión.
+          </p>
+          <a class="medido__link" href="/trabajos#vastago-cat-773g">Ver el caso completo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap mejoras">
+      <div>
+        <h2>Qué le mejoramos a una pieza</h2>
+        <p class="lead mejoras__lead">
+          Elegimos el recubrimiento según cómo se desgasta la pieza en servicio, no al revés.
+        </p>
+        <a class="btn btn--ghost" href="/soluciones">Ver cómo elegimos la solución</a>
+      </div>
+      <ul class="ticks mejoras__list">
+        {mejoras.map((m) => <li>{m}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Líneas propias</h2>
+        <p class="lead">Recubrimientos desarrollados por ECODUR para problemas concretos de la industria.</p>
+      </div>
+      <ul class="lineas">
+        {productos.map((p) => (
+          <li>
+            <a href={`/productos#${p.id}`}>
+              <span class="lineas__nombre">{p.nombre}</span>
+              <span class="lineas__uso">{p.uso}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap industrias">
+      <h2>Industrias que usan estos recubrimientos</h2>
+      <ul class="industrias__list">
+        {industrias.map((i) => <li>{i}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .hero {
+    background: var(--surface);
+    padding-top: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .hero__text h1 {
+    max-width: 16ch;
+  }
+
+  .hero__text .lead {
+    margin-top: 1.5rem;
+    max-width: 52ch;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .hero__figure {
+    margin: 0;
+  }
+
+  .hero__photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero__photo img {
+    object-position: 45% 50%;
+  }
+
+  figcaption {
+    margin-top: 0.6rem;
+    font-size: var(--step--1);
+    color: var(--steel);
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    border-top: 4px solid var(--red);
+  }
+
+  .facts > div {
+    padding: 1.25rem 1.5rem 1.75rem 0;
+  }
+
+  .facts > div + div {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .facts dt {
+    font-stretch: var(--narrow);
+    font-weight: 800;
+    font-size: var(--step-2);
+    line-height: 1.1;
+  }
+
+  .facts dd {
+    margin: 0.35rem 0 0;
+    color: var(--steel);
+  }
+
+  .procesos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .proceso {
+    border-top: 2px solid var(--ink);
+    padding-top: 1.25rem;
+  }
+
+  .proceso p {
+    margin-top: 0.9rem;
+    color: var(--steel);
+  }
+
+  .medido {
+    background: var(--plate);
+  }
+
+  .medido__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .medido__fotos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .medido__fotos figure {
+    margin: 0;
+  }
+
+  .medido__fotos .photo {
+    aspect-ratio: 3 / 5;
+  }
+
+  .medida + .medida {
+    margin-top: 2.25rem;
+  }
+
+  .medida__titulo {
+    font-size: var(--step-1);
+    font-stretch: var(--semi);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .medida__titulo .muted {
+    font-weight: 400;
+    font-size: var(--step--1);
+  }
+
+  .medida__fila {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr 7.5rem;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 0.4rem;
+  }
+
+  .medida__nombre {
+    font-size: var(--step--1);
+    color: var(--steel);
+  }
+
+  .medida__barra {
+    height: 0.9rem;
+    background: var(--surface);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .medida__barra span {
+    display: block;
+    height: 100%;
+    width: calc(var(--v) * 100%);
+    background: #9aa3a9;
+  }
+
+  .medida__valor {
+    font-stretch: var(--narrow);
+    font-weight: 750;
+    font-size: 1.9rem;
+    line-height: 1;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .medida__fila--ecodur .medida__nombre {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .medida__fila--ecodur .medida__barra span {
+    background: var(--red);
+  }
+
+  .medido__nota {
+    margin-top: 2rem;
+  }
+
+  .medido__link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 650;
+  }
+
+  .mejoras {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 4rem;
+    align-items: start;
+  }
+
+  .mejoras__lead {
+    margin-block: 1.25rem 1.75rem;
+  }
+
+  .mejoras__list {
+    font-size: var(--step-1);
+    gap: 0;
+  }
+
+  .mejoras__list li {
+    padding-block: 0.7rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .mejoras__list li::before {
+    top: 1.25em;
+  }
+
+  .lineas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .lineas a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+  }
+
+  .lineas__nombre {
+    font-stretch: var(--narrow);
+    font-weight: 800;
+    font-size: var(--step-1);
+  }
+
+  .lineas__uso {
+    color: var(--steel);
+    text-align: right;
+  }
+
+  .lineas a:hover .lineas__nombre {
+    color: var(--red-strong);
+  }
+
+  .industrias {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 2rem 4rem;
+  }
+
+  .industrias__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-content: start;
+  }
+
+  .industrias__list li {
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  @media (max-width: 60rem) {
+    .hero__grid,
+    .medido__grid,
+    .mejoras,
+    .industrias {
+      grid-template-columns: 1fr;
+    }
+
+    .lineas {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .facts,
+    .procesos {
+      grid-template-columns: 1fr;
+    }
+
+    .facts > div,
+    .facts > div + div {
+      padding: 1rem 0;
+      border-left: 0;
+    }
+
+    .facts > div + div {
+      border-top: 1px solid var(--rule);
+    }
+
+    .medida__fila {
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 1rem;
+    }
+
+    .medida__barra {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+
+    .medida__valor {
+      font-size: 1.5rem;
+    }
+
+    .lineas a {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .lineas__uso {
+      text-align: left;
+    }
+  }
+</style>

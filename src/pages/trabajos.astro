@@ -1,0 +1,200 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { trabajos } from '../data/trabajos';
+
+const [destacado, ...resto] = trabajos;
+---
+<Base title="Trabajos" description="Casos reales de ECODUR: vástagos CAT, manguitos de bomba, rodillos, ejes de turbina, cilindros Yankee, celdas de carga y más, con sus mediciones.">
+  <div class="wrap page-head">
+    <h1>Trabajos realizados</h1>
+    <p class="lead">
+      Piezas reales que pasaron por nuestra planta, con el recubrimiento que usamos y lo que medimos al entregarlas.
+    </p>
+  </div>
+
+  <section class="destacado" id={destacado.id}>
+    <div class="wrap destacado__grid">
+      <div class="destacado__text">
+        <p class="linea">{destacado.linea}</p>
+        <h2>{destacado.titulo}</h2>
+        <p class="destacado__resumen">{destacado.resumen}</p>
+        <ul class="ticks">
+          {destacado.detalles.map((d) => <li>{d}</li>)}
+        </ul>
+        {destacado.lecturas && (
+          <dl class="lecturas">
+            {destacado.lecturas.map((l) => (
+              <div class="readout">
+                <dt class="readout__label">{l.dato}</dt>
+                <dd class="readout__value">{l.valor}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </div>
+      <div class="destacado__fotos">
+        {destacado.fotos.map((f, i) => (
+          <div class={`photo f${i}`}><img src={f.src} alt={f.alt} loading={i < 2 ? 'eager' : 'lazy'} /></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap casos">
+      {resto.map((t) => (
+        <article class="caso" id={t.id}>
+          <div class={`caso__fotos n${Math.min(t.fotos.length, 3)}`}>
+            {t.fotos.slice(0, 3).map((f) => (
+              <div class="photo"><img src={f.src} alt={f.alt} loading="lazy" /></div>
+            ))}
+          </div>
+          <p class="linea">{t.linea}</p>
+          <h2 class="caso__titulo">{t.titulo}</h2>
+          <p class="caso__resumen">{t.resumen}</p>
+          {t.lecturas && (
+            <dl class="spec caso__spec">
+              {t.lecturas.map((l) => (
+                <div><dt>{l.dato}</dt><dd>{l.valor}</dd></div>
+              ))}
+            </dl>
+          )}
+          <ul class="ticks caso__detalles">
+            {t.detalles.map((d) => <li>{d}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .linea {
+    font-weight: 650;
+    color: var(--red-strong);
+    margin-bottom: 0.5rem;
+  }
+
+  .destacado {
+    background: var(--surface);
+    padding-block: clamp(3rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--rule);
+  }
+
+  .destacado__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .destacado__resumen {
+    margin-block: 1.25rem 1.5rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  .lecturas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+    margin: 2.25rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 4px solid var(--red);
+  }
+
+  .lecturas .readout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lecturas .readout__value {
+    order: -1;
+  }
+
+  .lecturas dd {
+    margin: 0;
+  }
+
+  .destacado__fotos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .destacado__fotos .photo {
+    aspect-ratio: 3 / 4.4;
+  }
+
+  .destacado__fotos .f1 {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    aspect-ratio: 642 / 146;
+  }
+
+  .casos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(3rem, 6vw, 4.5rem) clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .caso {
+    scroll-margin-top: 6rem;
+  }
+
+  .caso__fotos {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .caso__fotos .photo {
+    height: 15rem;
+  }
+
+  .caso__fotos.n2 {
+    grid-template-columns: 1.4fr 1fr;
+  }
+
+  .caso__fotos.n3 {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+
+  .caso__titulo {
+    font-size: var(--step-2);
+    line-height: 1.05;
+  }
+
+  .caso__resumen {
+    margin-top: 0.9rem;
+  }
+
+  .caso__spec {
+    margin-top: 1.25rem;
+  }
+
+  .caso__detalles {
+    margin-top: 1.25rem;
+    color: var(--steel);
+    font-size: 1rem;
+  }
+
+  @media (max-width: 56rem) {
+    .destacado__grid,
+    .casos {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .caso__fotos .photo {
+      height: 12rem;
+    }
+    .lecturas {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

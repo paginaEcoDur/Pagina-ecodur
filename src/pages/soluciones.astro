@@ -1,0 +1,302 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const mejoras = [
+  { titulo: 'Resistencia a la abrasión', texto: 'Para piezas que rozan contra partículas duras: vástagos, rodillos, transportes de material.' },
+  { titulo: 'Reconstrucción dimensional', texto: 'Devolvemos la medida original sin calentar la pieza ni cambiar la metalurgia del material base.' },
+  { titulo: 'Resistencia a la erosión', texto: 'Para superficies golpeadas por fluidos con sólidos o partículas en suspensión.' },
+  { titulo: 'Resistencia a la corrosión', texto: 'Barreras densas y selladas contra ácidos, cloruros, agua de mar y atmósferas agresivas.' },
+  { titulo: 'Resistencia a la cavitación', texto: 'Para impulsores, carcasas y piezas de bombas donde las burbujas de vapor desprenden material.' },
+  { titulo: 'Resistencia a la tribocorrosión', texto: 'Cuando el desgaste mecánico y el ataque químico actúan juntos y se aceleran entre sí.' },
+  { titulo: 'Aislación térmica y eléctrica', texto: 'Capas cerámicas que aíslan la pieza del calor o de la corriente.' },
+];
+
+const desgastes = [
+  { tipo: 'Abrasión', propiedad: ['Dureza del abrasivo y del recubrimiento'], mecanismo: ['Abrasión'] },
+  { tipo: 'Erosión por lodos', propiedad: ['Dureza', 'Resistencia a la corrosión'], mecanismo: ['Abrasión', 'Corrosión'] },
+  { tipo: 'Erosión por partículas sólidas', propiedad: ['Dureza y tamaño del abrasivo', 'Ductilidad'], mecanismo: ['Abrasión', 'Fatiga'] },
+  { tipo: 'Engrane (galling) y fretting', propiedad: ['Bajo coeficiente de fricción', 'Dureza'], mecanismo: ['Adhesión', 'Triboxidación'] },
+  { tipo: 'Impacto', propiedad: ['Ductilidad'], mecanismo: ['Fatiga'] },
+  { tipo: 'Cavitación e impacto de gotas', propiedad: ['Ductilidad', 'Dureza'], mecanismo: ['Fatiga', 'Corrosión'] },
+];
+
+const pasos = [
+  { titulo: 'Diagnóstico de la falla', texto: 'Revisamos la pieza, medimos el desgaste y entendemos qué lo provocó.' },
+  { titulo: 'Elección del recubrimiento', texto: 'Según el tipo de desgaste, elegimos entre más de 100 materiales o combinamos varios.' },
+  { titulo: 'Preparación y aplicación', texto: 'Preparamos la superficie y aplicamos la capa por proyección térmica, soldadura o hardfacing.' },
+  { titulo: 'Rectificado y pulido', texto: 'Llevamos la pieza a la medida OEM y al acabado que pide el servicio, hasta superpulido.' },
+  { titulo: 'Medición certificada', texto: 'Entregamos con espesor y rugosidad medidos y certificados.' },
+];
+---
+<Base title="Soluciones" description="Ingeniería de superficies: elegimos el recubrimiento según el tipo de desgaste de cada pieza. Abrasión, erosión, corrosión, cavitación, tribocorrosión y reconstrucción dimensional.">
+  <div class="wrap page-head">
+    <h1>Ingeniería de superficies</h1>
+    <p class="lead">
+      Una pieza casi nunca falla entera: falla su superficie. Por eso trabajamos sobre esa capa, con el material
+      que mejor resiste el desgaste que sufre en servicio.
+    </p>
+  </div>
+
+  <section class="wrap mejoras-sec">
+    <h2 class="visually-hidden">Qué mejoramos</h2>
+    <ul class="mejoras">
+      {mejoras.map((m) => (
+        <li>
+          <h3>{m.titulo}</h3>
+          <p>{m.texto}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section tabla-sec">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Cada desgaste pide una propiedad distinta</h2>
+        <p class="lead">
+          Antes de elegir el material identificamos cómo se gasta la pieza. Esta es la guía que usamos.
+        </p>
+      </div>
+      <div class="tabla-scroll" tabindex="0" role="region" aria-label="Tabla de tipos de desgaste">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th scope="col">Tipo de desgaste</th>
+              <th scope="col">Propiedad clave para protegerla</th>
+              <th scope="col">Mecanismo de desgaste</th>
+            </tr>
+          </thead>
+          <tbody>
+            {desgastes.map((d) => (
+              <tr>
+                <th scope="row">{d.tipo}</th>
+                <td>{d.propiedad.map((p) => <span>{p}</span>)}</td>
+                <td>{d.mecanismo.map((p, i) => <span class={i === 0 ? 'principal' : ''}>{p}</span>)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted tabla-nota">En la última columna, el primer mecanismo es el principal.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Cómo trabajamos una pieza</h2>
+      </div>
+      <ol class="pasos">
+        {pasos.map((p) => (
+          <li>
+            <h3>{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section cromo">
+    <div class="wrap cromo__grid">
+      <div class="cromo__text">
+        <h2>Una alternativa al cromo duro</h2>
+        <p>
+          El cromo duro tiene microfisuras dentro de la capa. Por ahí entran los agentes corrosivos, ácidos o
+          alcalinos, y atacan el sustrato. En piezas de acero eso termina en corrosión bajo la capa y, al final,
+          en descascarado y delaminación.
+        </p>
+        <p>
+          Los recubrimientos ECODUR HCR son mucho más densos: tienen menos de 1 % de porosidad y sus poros no están
+          interconectados. Funcionan como una barrera contra la corrosión bastante más eficiente que el cromo.
+        </p>
+        <p>
+          Además se pueden ajustar a cada caso: sumar una capa de anclaje, aumentar el espesor, modificar la
+          composición con más cromo, níquel u otros metales, o sellar la superficie para reforzar la protección.
+        </p>
+        <a class="btn btn--ghost" href="/productos#hcr">Ver la ficha de ECODUR HCR</a>
+      </div>
+      <figure class="cromo__fig">
+        <div class="photo"><img src="/img/micro-cromo.jpg" alt="Micrografía de una capa de cromo duro con fisuras verticales que atraviesan el recubrimiento" width="267" height="221" loading="lazy" /></div>
+        <figcaption>Corte de una capa de cromo duro: las fisuras verticales llegan hasta el material base.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .mejoras-sec {
+    padding-bottom: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  .mejoras {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 2.25rem 2rem;
+  }
+
+  .mejoras li {
+    border-left: 4px solid var(--red);
+    padding-left: 1rem;
+  }
+
+  .mejoras h3 {
+    font-size: var(--step-1);
+    line-height: 1.15;
+  }
+
+  .mejoras p {
+    margin-top: 0.5rem;
+    color: var(--steel);
+  }
+
+  .tabla-sec {
+    background: var(--surface);
+  }
+
+  .tabla-scroll {
+    overflow-x: auto;
+  }
+
+  .tabla {
+    width: 100%;
+    min-width: 40rem;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .tabla th,
+  .tabla td {
+    padding: 0.9rem 1rem 0.9rem 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  .tabla thead th {
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--steel);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .tabla tbody th {
+    font-stretch: var(--narrow);
+    font-weight: 800;
+    font-size: var(--step-1);
+    line-height: 1.15;
+    width: 30%;
+  }
+
+  .tabla td span {
+    display: block;
+  }
+
+  .tabla td span.principal {
+    font-weight: 700;
+  }
+
+  .tabla-nota {
+    margin-top: 1rem;
+    font-size: var(--step--1);
+  }
+
+  .pasos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    counter-reset: paso;
+  }
+
+  .pasos li {
+    counter-increment: paso;
+    border-top: 2px solid var(--ink);
+    padding-top: 1rem;
+  }
+
+  .pasos li::before {
+    content: counter(paso);
+    display: block;
+    font-stretch: var(--narrow);
+    font-weight: 800;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--red);
+    margin-bottom: 0.75rem;
+  }
+
+  .pasos h3 {
+    font-size: var(--step-1);
+    line-height: 1.15;
+  }
+
+  .pasos p {
+    margin-top: 0.5rem;
+    color: var(--steel);
+    font-size: 1rem;
+  }
+
+  .cromo {
+    background: var(--plate);
+  }
+
+  .cromo__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .cromo__text {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: start;
+  }
+
+  .cromo__text .btn {
+    margin-top: 0.75rem;
+  }
+
+  .cromo__fig {
+    margin: 0;
+  }
+
+  .cromo__fig .photo {
+    aspect-ratio: 267 / 221;
+  }
+
+  .cromo__fig figcaption {
+    margin-top: 0.6rem;
+    font-size: var(--step--1);
+    color: var(--steel);
+  }
+
+  @media (max-width: 64rem) {
+    .pasos {
+      grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    }
+  }
+
+  @media (max-width: 52rem) {
+    .cromo__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
