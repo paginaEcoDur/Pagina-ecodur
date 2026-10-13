@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { industrias } from '../data/site';
+import { sectores } from '../data/site';
 
 const pilares = [
   {
@@ -65,13 +65,18 @@ const pilares = [
   </section>
 
   <section class="section">
-    <div class="wrap industrias">
-      <div>
+    <div class="wrap">
+      <div class="section__head">
         <h2>Sectores que atendemos</h2>
-        <p class="lead industrias__lead">Nuestros recubrimientos se usan en industrias donde una pieza parada cuesta caro.</p>
+        <p class="lead">Nuestros recubrimientos se usan en industrias donde una pieza parada cuesta caro.</p>
       </div>
-      <ul class="ticks industrias__list">
-        {industrias.map((i) => <li>{i}</li>)}
+      <ul class="sectores">
+        {sectores.map((s) => (
+          <li class:list={['sector', { 'sector--sin-foto': !s.foto }]}>
+            {s.foto && <img src={s.foto} alt={s.alt ?? ''} loading="lazy" />}
+            <span class="sector__nombre">{s.nombre}</span>
+          </li>
+        ))}
       </ul>
     </div>
   </section>
@@ -117,25 +122,67 @@ const pilares = [
     color: var(--steel);
   }
 
-  .industrias {
+  .sectores {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem 4rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
   }
 
-  .industrias__lead {
-    margin-top: 1.25rem;
+  .sector {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--graphite);
+    border-bottom: 4px solid var(--red);
   }
 
-  .industrias__list {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem 2rem;
+  .sector img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sector::after {
+    content: '';
+    position: absolute;
+    inset: 40% 0 0 0;
+    background: linear-gradient(to bottom, rgb(28 33 37 / 0), rgb(28 33 37 / 0.85));
+  }
+
+  .sector--sin-foto::after {
+    display: none;
+  }
+
+  .sector__nombre {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.85rem;
+    z-index: 1;
+    color: #fff;
+    font-stretch: var(--narrow);
+    font-weight: 800;
     font-size: var(--step-1);
+    line-height: 1.05;
+  }
+
+  @media (max-width: 64rem) {
+    .sectores {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .sector__nombre {
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: 0.65rem;
+    }
   }
 
   @media (max-width: 56rem) {
-    .intro,
-    .industrias {
+    .intro {
       grid-template-columns: 1fr;
     }
     .pilares {
@@ -143,9 +190,4 @@ const pilares = [
     }
   }
 
-  @media (max-width: 30rem) {
-    .industrias__list {
-      grid-template-columns: 1fr;
-    }
-  }
 </style>

@@ -27,15 +27,22 @@ export const nav = [
   { href: '/trabajos', label: 'Trabajos' },
 ];
 
-export const industrias = [
-  'Agricultura',
-  'Cementeras',
-  'Oil & Gas',
-  'Siderurgia',
-  'Petroquímica y química',
-  'Papel e imprenta',
-  'Textil',
-  'Industria eléctrica',
-  'Aeronáutica',
-  'Estructuras navales',
+// Sectores que atiende ECODUR. Para sumar o cambiar una foto:
+// copiar la imagen a public/img/sectores/ y poner su ruta en `foto`.
+// Si `foto` queda vacío, la tarjeta se muestra en gris con el nombre del sector.
+export type Sector = { nombre: string; foto?: string; alt?: string };
+
+export const sectores: Sector[] = [
+  { nombre: 'Agricultura', foto: '/img/sectores/agricultura.jpg', alt: 'Rotor de una celda de carga de cáscara de maní recubierto' },
+  { nombre: 'Cementeras' },
+  { nombre: 'Oil & Gas', foto: '/img/sectores/oil-gas.jpg', alt: 'Cruceta de compresor de gas re-babbitada' },
+  { nombre: 'Siderurgia' },
+  { nombre: 'Petroquímica y química' },
+  { nombre: 'Papel e imprenta', foto: '/img/sectores/papel.jpg', alt: 'Cilindro secador Yankee de una máquina papelera' },
+  { nombre: 'Textil' },
+  { nombre: 'Industria eléctrica', foto: '/img/sectores/electrica.jpg', alt: 'Inducido de 5000 kg en el torno durante la restauración de sus apoyos' },
+  { nombre: 'Aeronáutica' },
+  { nombre: 'Estructuras navales' },
 ];
+
+export const industrias = sectores.map((s) => s.nombre);

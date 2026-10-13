@@ -19,6 +19,7 @@ npm run preview  # sirve /dist
 | Líneas de recubrimiento (fichas técnicas) | `src/data/productos.ts` |
 | Casos de trabajo y sus mediciones | `src/data/trabajos.ts` |
 | Fotos | `public/img/` |
+| Sectores que atendemos (y sus fotos) | `src/data/site.ts` → `sectores`, fotos en `public/img/sectores/` |
 | Colores y tipografía | `src/styles/global.css` |
 | Logo | `src/components/Logo.astro` |
 
@@ -62,6 +63,7 @@ Lo que más pesa fuera del sitio: perfil de Google Business con dirección y fot
 ## Pendientes con el cliente
 
 - **Logo original en vector** (.svg/.ai/.eps). El actual está redibujado a partir del PDF.
+- **Fotos por sector** para Cementeras, Siderurgia, Petroquímica y química, Textil, Aeronáutica y Estructuras navales (idealmente de trabajos propios). Formato horizontal, 1200 px de ancho o más. Agricultura, Oil & Gas, Papel e imprenta e Industria eléctrica usan por ahora fotos del PDF.
 - **Fotos en buena resolución.** Las del PDF son chicas (300–1000 px) y se ven blandas en pantallas grandes.
 - **Teléfono / WhatsApp** y dirección exacta dentro del Parque Industrial.
 - **Zona de cobertura:** ¿reciben piezas de todo el país? Si es así, agregarlo a `src/data/faq.ts` y a la descripción; es una de las primeras cosas que una IA necesita para recomendarlos.
