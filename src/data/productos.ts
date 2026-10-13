@@ -45,7 +45,7 @@ export const productos: Producto[] = [
     nombre: 'ECODUR WCM',
     uso: 'Reemplazo de cromo duro por HVOF',
     descripcion:
-      'Recubrimiento aplicado por HVOF para recuperar zonas de apoyo y sellos en ejes de alta exigencia, como ejes de turbina, donde el cromo duro no alcanza.',
+      'Recubrimiento aplicado por HVOF en reemplazo del cromo duro. Lo usamos para recuperar las zonas de apoyo y sellos de ejes de turbina.',
     ficha: [{ dato: 'Proceso', valor: 'HVOF' }],
     prestaciones: [
       'Restauración dimensional de zonas de apoyo y sellos',
@@ -107,6 +107,7 @@ export const productos: Producto[] = [
       'Resiste cloro gaseoso húmedo, hipoclorito y dióxido de cloro',
       'Apto para sistemas de desulfuración de gases de combustión',
       'Restauración dimensional sin afectar el sustrato original',
+      'Mayor dureza y resistencia a la abrasión que la pieza original',
     ],
     aplicaciones: 'Industria química y petroquímica, desulfuración de gases, equipos en contacto con agua de mar o salmuera.',
     imagen: { src: '/img/micro-c276.jpg', alt: 'Microestructura del recubrimiento ECODUR C276 PLUS' },
@@ -143,7 +144,7 @@ export const productos: Producto[] = [
     prestaciones: [
       'Dura de 3 a 5 veces más que una chapa antidesgaste tipo Hardox o el cromo duro',
       'Restauración dimensional de cuerpos, tapas y rotores',
-      'Balanceo mínimo o nulo después de aplicar',
+      'Balanceo mínimo o nulo después de aplicar, con buen seguimiento predictivo posterior',
     ],
     aplicaciones: 'Celdas de carga y piezas expuestas a abrasión severa, como en el procesamiento de maní.',
     imagen: { src: '/img/celda-mani-rotor.jpg', alt: 'Rotor de celda de carga de cáscara de maní recubierto con ECODUR ULTRA HARD' },
@@ -151,15 +152,15 @@ export const productos: Producto[] = [
   {
     id: 'babbitt',
     nombre: 'Babbitt (metal blanco)',
-    uso: 'Re-babbitado de cojinetes y crucetas',
+    uso: 'Re-babbitado de crucetas',
     descripcion:
-      'Recuperación de superficies antifricción en crucetas y cojinetes con metal blanco certificado.',
+      'Recuperación del diámetro de crucetas de fundición con metal blanco certificado.',
     ficha: [{ dato: 'Material', valor: 'Certificado, supera ASTM B23 Grado 2' }],
     prestaciones: [
       'Restauración dimensional del diámetro',
       'Mayor resistencia al desgaste adhesivo',
     ],
-    aplicaciones: 'Crucetas de compresores de gas, cojinetes de deslizamiento.',
+    aplicaciones: 'Crucetas de compresores de gas.',
     imagen: { src: '/img/cruceta-babbitt.jpg', alt: 'Cruceta de fundición de compresor de gas re-babbitada' },
   },
 ];

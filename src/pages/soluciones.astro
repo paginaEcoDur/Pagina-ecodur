@@ -7,18 +7,21 @@ const mejoras = [
   { titulo: 'Reconstrucción dimensional', texto: 'Devolvemos la medida original sin calentar la pieza ni cambiar la metalurgia del material base.' },
   { titulo: 'Resistencia a la erosión', texto: 'Para superficies golpeadas por fluidos con sólidos o partículas en suspensión.' },
   { titulo: 'Resistencia a la corrosión', texto: 'Barreras densas y selladas contra ácidos, cloruros, agua de mar y atmósferas agresivas.' },
-  { titulo: 'Resistencia a la cavitación', texto: 'Para impulsores, carcasas y piezas de bombas donde las burbujas de vapor desprenden material.' },
+  { titulo: 'Resistencia a la cavitación', texto: 'Para piezas donde las burbujas de vapor que colapsan sobre la superficie desprenden material.' },
   { titulo: 'Resistencia a la tribocorrosión', texto: 'Cuando el desgaste mecánico y el ataque químico actúan juntos y se aceleran entre sí.' },
   { titulo: 'Aislación térmica y eléctrica', texto: 'Capas cerámicas que aíslan la pieza del calor o de la corriente.' },
 ];
 
+// Tabla del material institucional (Ingeniería de superficie aplicada).
 const desgastes = [
   { tipo: 'Abrasión', propiedad: ['Dureza del abrasivo y del recubrimiento'], mecanismo: ['Abrasión'] },
   { tipo: 'Erosión por lodos', propiedad: ['Dureza', 'Resistencia a la corrosión'], mecanismo: ['Abrasión', 'Corrosión'] },
   { tipo: 'Erosión por partículas sólidas', propiedad: ['Dureza y tamaño del abrasivo', 'Ductilidad'], mecanismo: ['Abrasión', 'Fatiga'] },
-  { tipo: 'Engrane (galling) y fretting', propiedad: ['Bajo coeficiente de fricción', 'Dureza'], mecanismo: ['Adhesión', 'Triboxidación'] },
+  { tipo: 'Engrane (galling)', propiedad: ['Bajo coeficiente de fricción'], mecanismo: ['Adhesión'] },
+  { tipo: 'Fretting', propiedad: ['Dureza'], mecanismo: ['Triboxidación'] },
   { tipo: 'Impacto', propiedad: ['Ductilidad'], mecanismo: ['Fatiga'] },
-  { tipo: 'Cavitación e impacto de gotas', propiedad: ['Ductilidad', 'Dureza'], mecanismo: ['Fatiga', 'Corrosión'] },
+  { tipo: 'Cavitación', propiedad: ['Ductilidad'], mecanismo: ['Fatiga'] },
+  { tipo: 'Impacto de gotas', propiedad: ['Dureza'], mecanismo: ['Corrosión'] },
 ];
 
 const pasos = [
@@ -72,13 +75,12 @@ const pasos = [
               <tr>
                 <th scope="row">{d.tipo}</th>
                 <td>{d.propiedad.map((p) => <span>{p}</span>)}</td>
-                <td>{d.mecanismo.map((p, i) => <span class={i === 0 ? 'principal' : ''}>{p}</span>)}</td>
+                <td>{d.mecanismo.map((p) => <span>{p}</span>)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p class="muted tabla-nota">En la última columna, el primer mecanismo es el principal.</p>
     </div>
   </section>
 
@@ -204,15 +206,6 @@ const pasos = [
 
   .tabla td span {
     display: block;
-  }
-
-  .tabla td span.principal {
-    font-weight: 700;
-  }
-
-  .tabla-nota {
-    margin-top: 1rem;
-    font-size: var(--step--1);
   }
 
   .pasos {

@@ -25,14 +25,14 @@ export const nav = [
 ];
 
 export const industrias = [
-  'Minería y cementeras',
+  'Agricultura',
+  'Cementeras',
   'Oil & Gas',
   'Siderurgia',
   'Petroquímica y química',
-  'Agroindustria',
   'Papel e imprenta',
   'Textil',
-  'Energía eléctrica',
+  'Industria eléctrica',
   'Aeronáutica',
   'Estructuras navales',
 ];

@@ -21,6 +21,7 @@ export const trabajos: Trabajo[] = [
     detalles: [
       'Restauración dimensional de la zona de trabajo y reparación de la zona dañada',
       'Rectificado a medida OEM y superpulido',
+      'Entre 3 y 5 veces la vida útil del componente OEM',
       'Menor desgaste de retenes y sellos por la baja rugosidad final',
       'Entrega en 3 días',
     ],
@@ -53,9 +54,8 @@ export const trabajos: Trabajo[] = [
     id: 'rodillo-4m',
     titulo: 'Rodillo de 4 metros',
     linea: 'ECODUR HCR',
-    resumen: 'Reemplazo del cromo duro en un rodillo de 4 m de largo, con restauración dimensional y superpulido.',
+    resumen: 'Reemplazo del cromo duro en un rodillo de 4 m de largo, con restauración dimensional.',
     detalles: ['Restauración dimensional y resistencia a la abrasión', 'Entre 3 y 5 veces la vida útil'],
-    lecturas: [{ dato: 'Ra final', valor: '< 0,03 µm' }],
     fotos: [{ src: '/img/rodillo-4m.jpg', alt: 'Rodillo de 4 metros terminado, montado en el torno' }],
   },
   {
@@ -82,12 +82,13 @@ export const trabajos: Trabajo[] = [
     id: 'bombas-hvof',
     titulo: 'Componentes de bombas',
     linea: 'Carburo de tungsteno y carburo de cromo · HVOF',
-    resumen: 'Carcasas, impulsores y piezas de desgaste de bombas protegidas con carburos aplicados por HVOF.',
-    detalles: ['La pieza se mantiene a unos 100 °C durante la aplicación, sin riesgo de deformación'],
+    resumen: 'Piezas de bombas protegidas con carburo de tungsteno y carburo de cromo aplicados por HVOF.',
+    detalles: ['Temperatura de aplicación: 100 °C'],
     lecturas: [
       { dato: 'Dureza', valor: '62–72 HRc / 800–1300 HV0.3' },
       { dato: 'Adherencia', valor: '> 12.000 psi (83 MPa)' },
       { dato: 'Porosidad', valor: '< 1 %' },
+      { dato: 'Espesor según se proyecta', valor: '0,02–0,05 mm' },
     ],
     fotos: [{ src: '/img/bomba-hvof.jpg', alt: 'Corte de una bomba centrífuga señalando las piezas recubiertas' }],
   },
@@ -113,8 +114,8 @@ export const trabajos: Trabajo[] = [
     id: 'inducido',
     titulo: 'Apoyos de inducido de 5000 kg',
     linea: 'ECODUR REBUILD M',
-    resumen: 'Restauración dimensional de los apoyos de un inducido de 5000 kg, trabajado en nuestro torno de gran porte.',
-    detalles: ['Recuperación sin cambiar la metalurgia del eje'],
+    resumen: 'Restauración dimensional de los apoyos de un inducido de 5000 kg.',
+    detalles: ['Restauración dimensional sin afectar el sustrato original'],
     fotos: [{ src: '/img/taller-torno.jpg', alt: 'Inducido de 5000 kg montado en el torno de Ecodur' }],
   },
   {
@@ -122,7 +123,7 @@ export const trabajos: Trabajo[] = [
     titulo: 'Eje con desgaste severo',
     linea: 'ECODUR REBUILD M',
     resumen: 'Reconstrucción de un eje aportando 25 mm en el diámetro, sin afectar el material base.',
-    detalles: ['Mayor dureza que la pieza original', 'Mayor resistencia a la abrasión y la corrosión'],
+    detalles: ['Mayor dureza que la pieza original', 'Mayor resistencia a la abrasión y la corrosión', 'Acabado pulido o superpulido a pedido, con rugosidad certificada'],
     lecturas: [{ dato: 'Aporte', valor: '+25 mm en diámetro' }],
     fotos: [{ src: '/img/rebuild-m-eje.jpg', alt: 'Eje antes y después de la reconstrucción' }],
   },
@@ -134,7 +135,7 @@ export const trabajos: Trabajo[] = [
     detalles: ['Mayor dureza y resistencia a la abrasión', 'Mayor resistencia a la corrosión'],
     fotos: [
       { src: '/img/yankee.jpg', alt: 'Cilindro Yankee' },
-      { src: '/img/arco-spray.jpg', alt: 'Proyección por arco eléctrico en marcha' },
+      { src: '/img/arco-spray.jpg', alt: 'Proyección térmica en marcha' },
     ],
   },
   {

@@ -25,7 +25,7 @@ export function resumen(base: URL) {
 
 > ${site.descripcion}
 
-ECODUR repara y fabrica componentes mecánicos industriales aplicando recubrimientos metálicos, cerámicos y cermet por metalización por proyección térmica (HVOF y arco eléctrico), soldaduras especiales y hardfacing. Más de 12 años en el mercado metalúrgico, planta propia de 650 m² en el Parque Industrial de Olavarría (Buenos Aires, Argentina) y más de 100 materiales para seleccionar y combinar.
+ECODUR repara y fabrica componentes mecánicos industriales aplicando recubrimientos metálicos, cerámicos y cermet por metalización por proyección térmica de alta velocidad (HVOF), soldaduras especiales y hardfacing. Más de 12 años en el mercado metalúrgico, planta propia de 650 m² en el Parque Industrial de Olavarría (Buenos Aires, Argentina) y más de 100 materiales para seleccionar y combinar.
 
 Resuelve desgaste por abrasión, erosión, corrosión, cavitación y tribocorrosión, y recupera la medida de piezas gastadas sin cambiar el material base. Su línea ECODUR HCR es una alternativa al cromo duro, más densa y resistente a la corrosión, que según la empresa alarga entre 3 y 5 veces la vida útil del componente.
 

@@ -10,7 +10,7 @@ export const faq: { pregunta: string; respuesta: string }[] = [
   {
     pregunta: '¿Qué hace ECODUR?',
     respuesta:
-      'ECODUR S.A. es una empresa de Olavarría, Buenos Aires, que repara y fabrica componentes mecánicos aplicando recubrimientos metálicos, cerámicos y cermet. Trabaja con metalización por proyección térmica (HVOF y arco eléctrico), soldaduras especiales y hardfacing. Tiene más de 12 años en el mercado metalúrgico y una planta propia de 650 m² en el Parque Industrial de Olavarría.',
+      'ECODUR S.A. es una empresa de Olavarría, Buenos Aires, que repara y fabrica componentes mecánicos aplicando recubrimientos metálicos, cerámicos y cermet. Trabaja con metalización por proyección térmica de alta velocidad (HVOF), soldaduras especiales y hardfacing. Tiene más de 12 años en el mercado metalúrgico y una planta propia de 650 m² en el Parque Industrial de Olavarría.',
   },
   {
     pregunta: '¿Qué alternativa hay al cromo duro?',
@@ -26,7 +26,7 @@ export const faq: { pregunta: string; respuesta: string }[] = [
   },
   {
     pregunta: '¿Qué piezas reparan?',
-    respuesta: `Entre otras: vástagos de cilindros y amortiguadores, manguitos y componentes de bombas, rodillos (incluso de 4 m de largo), ejes de turbina, apoyos de inducidos de hasta 5000 kg, cilindros secadores Yankee, celdas de carga rotativas, crucetas de compresores (re-babbitado) y camisas. ${contacto}`,
+    respuesta: `Entre otras: vástagos de cilindros y amortiguadores, manguitos y componentes de bombas, rodillos (incluso de 4 m de largo), ejes de turbina, apoyos de inducidos de hasta 5000 kg, cilindros secadores Yankee, celdas de carga rotativas, crucetas de compresores de gas (re-babbitado) y camisas de 300 mm de diámetro. ${contacto}`,
   },
   {
     pregunta: '¿Cómo se protege una pieza contra la corrosión química?',
@@ -38,7 +38,7 @@ export const faq: { pregunta: string; respuesta: string }[] = [
   },
   {
     pregunta: '¿Para qué industrias trabajan?',
-    respuesta: `Minería y cementeras, Oil & Gas, siderurgia, petroquímica y química, agroindustria, papel e imprenta, textil, energía eléctrica, aeronáutica y estructuras navales. ${contacto}`,
+    respuesta: `Agricultura, papel e imprenta, textil, industria eléctrica, aeronáutica, estructuras navales, cementeras, Oil & Gas, siderurgia, petroquímica y química. ${contacto}`,
   },
   {
     pregunta: '¿Entregan las piezas con mediciones?',

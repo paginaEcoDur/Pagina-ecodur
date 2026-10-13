@@ -71,3 +71,7 @@ Lo que más pesa fuera del sitio: perfil de Google Business con dirección y fot
   - "ASTM 23 Grado 2" para el babbitt se publicó como **ASTM B23 Grado 2**.
   - Vástagos CAT: el texto decía Ra < 0,02 µm pero la foto del rugosímetro marca 0,024 µm; se publicó **0,024 µm**.
   - Ficha técnica de ECODUR WCM, REBUILD y las líneas sin datos (ECO Al 1100, 9091, REBUILD C, REBUILD PLUS).
+- Confirmar textos que no están en el PDF y se redactaron para la web:
+  - "Cómo trabajamos una pieza" en Soluciones (diagnóstico → elección → aplicación → rectificado → medición).
+  - Que responden cada consulta con diagnóstico y solución recomendada (Contacto, Preguntas frecuentes).
+  - Las descripciones de qué es cada proceso (soldaduras especiales, hardfacing) y de cada tipo de mejora.
