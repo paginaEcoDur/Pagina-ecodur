@@ -11,7 +11,10 @@ export const site = {
   whatsapp: null as string | null, // solo números, ej: '5492284000000'
   direccion: 'Parque Industrial de Olavarría',
   ciudad: 'Olavarría, Buenos Aires, Argentina',
-  mapaQuery: 'Parque Industrial Olavarría, Buenos Aires',
+  // Link de Google Maps de la planta (el que da "Compartir" en Maps) o dirección exacta.
+  // Mientras quede en null, la página de contacto no muestra mapa: una búsqueda genérica
+  // hace que Google marque otro negocio.
+  mapaQuery: null as string | null,
   anios: '+12',
   superficie: '650 m²',
   materiales: '+100',

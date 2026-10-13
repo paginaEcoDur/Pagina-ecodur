@@ -6,7 +6,7 @@ import { site } from '../data/site';
 // Se configura como variable de entorno PUBLIC_WEB3FORMS_KEY en Cloudflare Pages.
 // Si no está configurada, la página muestra solo los mails.
 const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined;
-const mapa = `https://www.google.com/maps?q=${encodeURIComponent(site.mapaQuery)}&output=embed`;
+const mapa = site.mapaQuery ? `https://www.google.com/maps?q=${encodeURIComponent(site.mapaQuery)}&output=embed` : null;
 ---
 <Base title="Contacto" description="Contacto de ECODUR S.A., Parque Industrial de Olavarría. Envíenos fotos y medidas de su pieza para recibir un diagnóstico.">
   <div class="wrap page-head">
@@ -30,13 +30,15 @@ const mapa = `https://www.google.com/maps?q=${encodeURIComponent(site.mapaQuery)
 
       <h2 class="contacto__sub">Dónde estamos</h2>
       <p>{site.direccion}<br />{site.ciudad}</p>
-      <div class="mapa">
-        <iframe
-          src={mapa}
-          title="Mapa: ubicación de ECODUR en el Parque Industrial de Olavarría"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+      {mapa && (
+        <div class="mapa">
+          <iframe
+            src={mapa}
+            title="Mapa: ubicación de ECODUR en el Parque Industrial de Olavarría"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      )}
     </div>
 
     {formKey ? (
