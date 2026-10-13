@@ -138,7 +138,10 @@ const fmt = (n: number) => n.toLocaleString('es-AR', { minimumFractionDigits: n 
         <p class="lead mejoras__lead">
           Elegimos el recubrimiento según cómo se desgasta la pieza en servicio, no al revés.
         </p>
-        <a class="btn btn--ghost" href="/soluciones">Ver cómo elegimos la solución</a>
+        <div class="mejoras__links">
+          <a class="btn btn--ghost" href="/soluciones">Ver cómo elegimos la solución</a>
+          <a href="/preguntas">Preguntas frecuentes</a>
+        </div>
       </div>
       <ul class="ticks mejoras__list">
         {mejoras.map((m) => <li>{m}</li>)}
@@ -373,6 +376,14 @@ const fmt = (n: number) => n.toLocaleString('es-AR', { minimumFractionDigits: n 
 
   .mejoras__lead {
     margin-block: 1.25rem 1.75rem;
+  }
+
+  .mejoras__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    font-weight: 600;
   }
 
   .mejoras__list {

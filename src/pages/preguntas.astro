@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { faq } from '../data/faq';
+
+const schema = [
+  {
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.pregunta,
+      acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
+    })),
+  },
+];
+---
+<Base
+  title="Preguntas frecuentes"
+  description="Respuestas sobre reemplazo de cromo duro, recuperación de vástagos y ejes, protección contra corrosión y abrasión, y cómo pedir presupuesto a ECODUR."
+  schema={schema}
+>
+  <div class="wrap page-head">
+    <h1>Preguntas frecuentes</h1>
+    <p class="lead">Lo que más nos consultan sobre recubrimientos, reparación de piezas y cómo trabajamos.</p>
+  </div>
+
+  <section class="wrap faq">
+    {faq.map((f) => (
+      <article class="faq__item">
+        <h2>{f.pregunta}</h2>
+        <p>{f.respuesta}</p>
+      </article>
+    ))}
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .faq {
+    padding-bottom: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  .faq__item {
+    max-width: 52rem;
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .faq__item h2 {
+    font-size: var(--step-2);
+    line-height: 1.1;
+  }
+
+  .faq__item p {
+    margin-top: 0.75rem;
+  }
+</style>

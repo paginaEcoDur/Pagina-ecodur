@@ -4,24 +4,32 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+import { productos } from '../data/productos';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  /** Datos estructurados extra de la página (FAQPage, ItemList, etc.) */
+  schema?: Record<string, unknown>[];
 }
 
-const { title, description = site.descripcion, image = '/img/vastago-despues.jpg' } = Astro.props;
+const { title, description = site.descripcion, image = '/img/vastago-despues.jpg', schema: extra = [] } = Astro.props;
 const fullTitle = title ? `${title} | ECODUR` : 'ECODUR | Recubrimientos industriales y metalización en Olavarría';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+const home = Astro.site!.toString();
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: site.nombre,
+// Ficha de la empresa para buscadores y asistentes de IA (schema.org).
+const empresa = {
+  '@type': ['Organization', 'LocalBusiness'],
+  '@id': `${home}#empresa`,
+  name: 'ECODUR',
+  legalName: site.nombre,
   description: site.descripcion,
-  url: Astro.site?.toString(),
+  url: home,
+  logo: new URL('/favicon.svg', Astro.site).href,
+  image: new URL('/img/taller-torno.jpg', Astro.site).href,
   email: site.emails[0],
   ...(site.telefono ? { telephone: site.telefono } : {}),
   address: {
@@ -31,7 +39,32 @@ const schema = {
     addressRegion: 'Buenos Aires',
     addressCountry: 'AR',
   },
+  contactPoint: site.emails.map((e) => ({ '@type': 'ContactPoint', contactType: 'ventas y consultas técnicas', email: e, availableLanguage: 'es' })),
+  knowsAbout: [
+    'Metalización por proyección térmica',
+    'HVOF',
+    'Proyección por arco eléctrico',
+    'Reemplazo de cromo duro',
+    'Hardfacing',
+    'Soldaduras especiales',
+    'Recuperación dimensional de piezas',
+    'Recubrimientos antidesgaste',
+    'Recubrimientos anticorrosivos',
+    'Carburo de tungsteno',
+    'Carburo de cromo',
+    'Re-babbitado de cojinetes',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios y líneas de recubrimiento',
+    itemListElement: productos.map((p) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: p.nombre, description: `${p.uso}. ${p.descripcion}`, url: `${home}productos#${p.id}` },
+    })),
+  },
 };
+
+const graph = { '@context': 'https://schema.org', '@graph': [empresa, ...extra] };
 ---
 <!doctype html>
 <html lang="es-AR">
@@ -52,7 +85,8 @@ const schema = {
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Resumen de ECODUR para asistentes de IA" />
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
   </head>
   <body>
     <a class="skip" href="#contenido">Saltar al contenido</a>

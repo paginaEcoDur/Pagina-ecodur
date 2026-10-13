@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 
-const paginas = ['/', '/empresa', '/soluciones', '/productos', '/trabajos', '/contacto'];
+const paginas = ['/', '/empresa', '/soluciones', '/productos', '/trabajos', '/preguntas', '/contacto'];
 
 export const GET: APIRoute = ({ site }) => {
   const urls = paginas

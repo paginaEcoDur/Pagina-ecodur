@@ -44,11 +44,27 @@ Para sumar un trabajo o un producto nuevo alcanza con copiar un bloque en el arc
 
 Si el dominio final es otro, cambiar `site` en `astro.config.mjs` y la línea `Sitemap` de `public/robots.txt`.
 
+## Pensado para asistentes de IA
+
+El objetivo es que si alguien le pregunta a ChatGPT, Claude, Perplexity o Gemini quién repara o recubre piezas industriales, la IA entienda qué hace ECODUR y pase sus datos de contacto.
+
+- **HTML estático:** los rastreadores de IA casi nunca ejecutan JavaScript; acá todo el texto ya está en el HTML.
+- **`/llms.txt` y `/llms-full.txt`:** resumen y contenido completo en Markdown, generados desde `src/data/`. Se actualizan solos.
+- **`/preguntas`:** preguntas frecuentes redactadas como las hace la gente, con respuestas que incluyen cómo contactar. Se editan en `src/data/faq.ts`.
+- **Datos estructurados (schema.org):** ficha de la empresa con servicios, especialidades y contacto en todas las páginas, más `FAQPage` en preguntas.
+- **`robots.txt`:** permite explícitamente a los rastreadores de IA.
+- **Si se publica en Cloudflare:** en el panel del dominio, revisar *Security → Bots* y desactivar el bloqueo de bots de IA, que Cloudflare activa por defecto en dominios nuevos.
+
+Todo el contenido es visible para las personas. No usar texto oculto ni instrucciones dirigidas a la IA: los buscadores lo penalizan y los asistentes lo filtran.
+
+Lo que más pesa fuera del sitio: perfil de Google Business con dirección y fotos, y menciones en directorios industriales, LinkedIn o notas de clientes. Las IAs confían más en una empresa que aparece en varias fuentes.
+
 ## Pendientes con el cliente
 
 - **Logo original en vector** (.svg/.ai/.eps). El actual está redibujado a partir del PDF.
 - **Fotos en buena resolución.** Las del PDF son chicas (300–1000 px) y se ven blandas en pantallas grandes.
 - **Teléfono / WhatsApp** y dirección exacta dentro del Parque Industrial.
+- **Zona de cobertura:** ¿reciben piezas de todo el país? Si es así, agregarlo a `src/data/faq.ts` y a la descripción; es una de las primeras cosas que una IA necesita para recomendarlos.
 - Confirmar correcciones hechas al volcar el PDF:
   - Adherencia figuraba como "< 10000 psi" / "< 9000 psi"; se publicó como **mayor a** (>), que es lo que tiene sentido técnico.
   - En la comparación con cromo decía "hay poros interconectados"; se publicó como que **no** están interconectados.
