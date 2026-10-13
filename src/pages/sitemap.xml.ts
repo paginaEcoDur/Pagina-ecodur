@@ -1,6 +1,10 @@
 import type { APIRoute } from 'astro';
+import { sectoresConFotos } from '../lib/galerias';
 
-const paginas = ['/', '/empresa', '/soluciones', '/productos', '/trabajos', '/preguntas', '/contacto'];
+const paginas = [
+  '/', '/empresa', '/soluciones', '/productos', '/trabajos', '/preguntas', '/contacto',
+  ...sectoresConFotos.flatMap((s) => (s.url ? [s.url] : [])),
+];
 
 export const GET: APIRoute = ({ site }) => {
   const urls = paginas

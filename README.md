@@ -19,11 +19,24 @@ npm run preview  # sirve /dist
 | Líneas de recubrimiento (fichas técnicas) | `src/data/productos.ts` |
 | Casos de trabajo y sus mediciones | `src/data/trabajos.ts` |
 | Fotos | `public/img/` |
-| Sectores que atendemos (y sus fotos) | `src/data/site.ts` → `sectores`, fotos en `public/img/sectores/` |
+| Sectores que atendemos | `src/data/site.ts` → `sectores` (nombre y texto) |
+| Galería de fotos de cada sector | `src/assets/sectores/<sector>/` (ver abajo) |
 | Colores y tipografía | `src/styles/global.css` |
 | Logo | `src/components/Logo.astro` |
 
 Para sumar un trabajo o un producto nuevo alcanza con copiar un bloque en el archivo de datos y subir la foto a `public/img/`. No hace falta tocar el diseño.
+
+## Galerías por sector
+
+Cada sector de la página Empresa lleva a su galería (`/sectores/agricultura`, etc.). Para sumar fotos no hay que tocar código:
+
+1. Copiar las fotos a la carpeta del sector en `src/assets/sectores/` (por ejemplo `src/assets/sectores/cementeras/`). Sirven jpg, png o webp, aunque sean pesadas: al publicar se achican y se convierten solas.
+2. El nombre del archivo es la descripción de la foto: `2-molino-de-clinker-recuperado.jpg` se muestra como "Molino de clinker recuperado". Se pueden usar tildes y ñ.
+3. El número del principio define el orden. La primera foto es la portada de la tarjeta.
+
+Si la carpeta de un sector está vacía, su tarjeta se ve en gris y no lleva a ninguna página. En cuanto tiene una foto, aparece la galería.
+
+Para agregar un texto arriba de la galería o vincular trabajos de `src/data/trabajos.ts`, completar `texto` y `trabajos` del sector en `src/data/site.ts`.
 
 ## Publicación en Cloudflare Pages
 
@@ -63,7 +76,7 @@ Lo que más pesa fuera del sitio: perfil de Google Business con dirección y fot
 ## Pendientes con el cliente
 
 - **Logo original en vector** (.svg/.ai/.eps). El actual está redibujado a partir del PDF.
-- **Fotos por sector** para Cementeras, Siderurgia, Petroquímica y química, Textil, Aeronáutica y Estructuras navales (idealmente de trabajos propios). Formato horizontal, 1200 px de ancho o más. Agricultura, Oil & Gas, Papel e imprenta e Industria eléctrica usan por ahora fotos del PDF.
+- **Fotos por sector** para las galerías de Cementeras, Siderurgia, Petroquímica y química, Textil, Aeronáutica y Estructuras navales, y más fotos para los demás (idealmente de trabajos propios, con una línea de qué es cada una). Agricultura, Oil & Gas, Papel e imprenta e Industria eléctrica usan por ahora fotos del PDF.
 - **Fotos en buena resolución.** Las del PDF son chicas (300–1000 px) y se ven blandas en pantallas grandes.
 - **Teléfono / WhatsApp** y dirección exacta dentro del Parque Industrial.
 - **Zona de cobertura:** ¿reciben piezas de todo el país? Si es así, agregarlo a `src/data/faq.ts` y a la descripción; es una de las primeras cosas que una IA necesita para recomendarlos.

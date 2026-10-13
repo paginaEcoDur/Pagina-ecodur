@@ -27,22 +27,47 @@ export const nav = [
   { href: '/trabajos', label: 'Trabajos' },
 ];
 
-// Sectores que atiende ECODUR. Para sumar o cambiar una foto:
-// copiar la imagen a public/img/sectores/ y poner su ruta en `foto`.
-// Si `foto` queda vacío, la tarjeta se muestra en gris con el nombre del sector.
-export type Sector = { nombre: string; foto?: string; alt?: string };
+// Sectores que atiende ECODUR.
+// Las fotos de cada sector van en src/assets/sectores/<carpeta>/ (jpg, png o webp).
+// - El nombre del archivo se usa como descripción de la foto: "rotor-de-celda-de-carga.jpg".
+// - Se ordenan por nombre: empezar con 1-, 2-, 3- para elegir el orden. La primera es la portada.
+// - Si la carpeta está vacía, la tarjeta se ve en gris y no lleva a ninguna galería.
+// `texto` es opcional: una o dos frases que se muestran arriba de la galería.
+export type Sector = { nombre: string; carpeta: string; texto?: string; trabajos?: string[] };
 
 export const sectores: Sector[] = [
-  { nombre: 'Agricultura', foto: '/img/sectores/agricultura.jpg', alt: 'Rotor de una celda de carga de cáscara de maní recubierto' },
-  { nombre: 'Cementeras' },
-  { nombre: 'Oil & Gas', foto: '/img/sectores/oil-gas.jpg', alt: 'Cruceta de compresor de gas re-babbitada' },
-  { nombre: 'Siderurgia' },
-  { nombre: 'Petroquímica y química' },
-  { nombre: 'Papel e imprenta', foto: '/img/sectores/papel.jpg', alt: 'Cilindro secador Yankee de una máquina papelera' },
-  { nombre: 'Textil' },
-  { nombre: 'Industria eléctrica', foto: '/img/sectores/electrica.jpg', alt: 'Inducido de 5000 kg en el torno durante la restauración de sus apoyos' },
-  { nombre: 'Aeronáutica' },
-  { nombre: 'Estructuras navales' },
+  {
+    nombre: 'Agricultura',
+    carpeta: 'agricultura',
+    texto:
+      'Celda de carga rotativa para cáscara de maní, recubierta con ECODUR ULTRA HARD – AGRO PLUS: más de 1000 HV de dureza, aplicación en frío y espesor controlado para un balanceo mínimo o nulo.',
+    trabajos: ['celda-mani'],
+  },
+  { nombre: 'Cementeras', carpeta: 'cementeras' },
+  {
+    nombre: 'Oil & Gas',
+    carpeta: 'oil-gas',
+    texto: 'Re-babbitado de una cruceta de fundición de compresor de gas con metal blanco certificado.',
+    trabajos: ['cruceta-compresor'],
+  },
+  { nombre: 'Siderurgia', carpeta: 'siderurgia' },
+  { nombre: 'Petroquímica y química', carpeta: 'petroquimica' },
+  {
+    nombre: 'Papel e imprenta',
+    carpeta: 'papel-imprenta',
+    texto:
+      'Restauración dimensional de un cilindro secador Yankee con ECODUR REBUILD, con baja porosidad final para mejorar la transmisión térmica.',
+    trabajos: ['yankee'],
+  },
+  { nombre: 'Textil', carpeta: 'textil' },
+  {
+    nombre: 'Industria eléctrica',
+    carpeta: 'industria-electrica',
+    texto: 'Restauración dimensional de los apoyos de un inducido de 5000 kg con ECODUR REBUILD M.',
+    trabajos: ['inducido'],
+  },
+  { nombre: 'Aeronáutica', carpeta: 'aeronautica' },
+  { nombre: 'Estructuras navales', carpeta: 'navales' },
 ];
 
 export const industrias = sectores.map((s) => s.nombre);

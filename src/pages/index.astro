@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { productos } from '../data/productos';
-import { industrias } from '../data/site';
+import { sectoresConFotos } from '../lib/galerias';
 
 const procesos = [
   {
@@ -172,7 +172,7 @@ const fmt = (n: number) => n.toLocaleString('es-AR', { minimumFractionDigits: n 
     <div class="wrap industrias">
       <h2>Industrias que usan estos recubrimientos</h2>
       <ul class="industrias__list">
-        {industrias.map((i) => <li>{i}</li>)}
+        {sectoresConFotos.map((s) => <li>{s.url ? <a href={s.url}>{s.nombre}</a> : s.nombre}</li>)}
       </ul>
     </div>
   </section>
@@ -449,6 +449,18 @@ const fmt = (n: number) => n.toLocaleString('es-AR', { minimumFractionDigits: n 
     flex-wrap: wrap;
     gap: 0.6rem;
     align-content: start;
+  }
+
+  .industrias__list a {
+    display: block;
+    margin: -0.45rem -0.9rem;
+    padding: 0.45rem 0.9rem;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .industrias__list a:hover {
+    color: var(--red-strong);
   }
 
   .industrias__list li {

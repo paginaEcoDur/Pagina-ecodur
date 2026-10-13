@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { sectores } from '../data/site';
+import { Image } from 'astro:assets';
+import { sectoresConFotos } from '../lib/galerias';
 
 const pilares = [
   {
@@ -64,17 +65,24 @@ const pilares = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="sectores">
     <div class="wrap">
       <div class="section__head">
         <h2>Sectores que atendemos</h2>
         <p class="lead">Nuestros recubrimientos se usan en industrias donde una pieza parada cuesta caro.</p>
       </div>
       <ul class="sectores">
-        {sectores.map((s) => (
-          <li class:list={['sector', { 'sector--sin-foto': !s.foto }]}>
-            {s.foto && <img src={s.foto} alt={s.alt ?? ''} loading="lazy" />}
-            <span class="sector__nombre">{s.nombre}</span>
+        {sectoresConFotos.map((s) => (
+          <li class:list={['sector', { 'sector--sin-foto': !s.url }]}>
+            {s.url ? (
+              <a href={s.url} class="sector__link">
+                <Image src={s.fotos[0].src} alt="" widths={[320, 640]} sizes="(max-width: 64rem) 50vw, 20vw" loading="lazy" />
+                <span class="sector__nombre">{s.nombre}</span>
+                <span class="sector__cant">{s.fotos.length === 1 ? '1 foto' : `${s.fotos.length} fotos`}</span>
+              </a>
+            ) : (
+              <span class="sector__nombre">{s.nombre}</span>
+            )}
           </li>
         ))}
       </ul>
@@ -140,10 +148,38 @@ const pilares = [
     border-bottom: 4px solid var(--red);
   }
 
+  .sector__link {
+    display: block;
+    height: 100%;
+    color: #fff;
+    text-decoration: none;
+  }
+
   .sector img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.25s ease;
+  }
+
+  .sector__link:hover img {
+    transform: scale(1.04);
+  }
+
+  .sector__link:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .sector__cant {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    z-index: 1;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius);
+    background: rgb(28 33 37 / 0.75);
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 
   .sector::after {
