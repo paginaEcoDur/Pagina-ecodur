@@ -47,8 +47,9 @@ export const sectores: Sector[] = [
   {
     nombre: 'Oil & Gas',
     carpeta: 'oil-gas',
-    texto: 'Re-babbitado de una cruceta de fundición de compresor de gas con metal blanco certificado.',
-    trabajos: ['cruceta-compresor'],
+    texto:
+      'Re-babbitado de crucetas de compresores de gas, plungers de bomba y componentes de bombas protegidos con carburo de tungsteno y carburo de cromo por HVOF.',
+    trabajos: ['cruceta-compresor', 'bombas-hvof'],
   },
   { nombre: 'Siderurgia', carpeta: 'siderurgia' },
   { nombre: 'Petroquímica y química', carpeta: 'petroquimica' },
@@ -56,15 +57,16 @@ export const sectores: Sector[] = [
     nombre: 'Papel e imprenta',
     carpeta: 'papel-imprenta',
     texto:
-      'Restauración dimensional de un cilindro secador Yankee con ECODUR REBUILD, con baja porosidad final para mejorar la transmisión térmica.',
-    trabajos: ['yankee'],
+      'Rodillos de arrastre y de tracción, rolos, camisas y manguitos recubiertos para máquinas papeleras, y restauración dimensional de cilindros secadores Yankee.',
+    trabajos: ['rodillo-arrastre-wcco', 'yankee', 'camisa-300'],
   },
   { nombre: 'Textil', carpeta: 'textil' },
   {
     nombre: 'Industria eléctrica',
     carpeta: 'industria-electrica',
-    texto: 'Restauración dimensional de los apoyos de un inducido de 5000 kg con ECODUR REBUILD M.',
-    trabajos: ['inducido'],
+    texto:
+      'Recuperación de puntas de eje, chaveteros y apoyos de inducidos de motores eléctricos con ECODUR REBUILD M, a diámetro OEM y sin afectar el material base.',
+    trabajos: ['punta-eje-motor', 'inducido'],
   },
   { nombre: 'Aeronáutica', carpeta: 'aeronautica' },
   { nombre: 'Estructuras navales', carpeta: 'navales' },

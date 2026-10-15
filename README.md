@@ -76,7 +76,7 @@ Lo que más pesa fuera del sitio: perfil de Google Business con dirección y fot
 ## Pendientes con el cliente
 
 - **Logo original en vector** (.svg/.ai/.eps). El actual está redibujado a partir del PDF.
-- **Fotos por sector** para las galerías de Cementeras, Siderurgia, Petroquímica y química, Textil, Aeronáutica y Estructuras navales, y más fotos para los demás (idealmente de trabajos propios, con una línea de qué es cada una). Agricultura, Oil & Gas, Papel e imprenta e Industria eléctrica usan por ahora fotos del PDF.
+- **Fotos por sector** para Textil, Petroquímica y química y Estructuras navales, que todavía no tienen galería.
 - **Fotos en buena resolución.** Las del PDF son chicas (300–1000 px) y se ven blandas en pantallas grandes.
 - **Teléfono / WhatsApp** y dirección exacta dentro del Parque Industrial.
 - **Zona de cobertura:** ¿reciben piezas de todo el país? Si es así, agregarlo a `src/data/faq.ts` y a la descripción; es una de las primeras cosas que una IA necesita para recomendarlos.

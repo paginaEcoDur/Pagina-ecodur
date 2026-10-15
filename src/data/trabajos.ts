@@ -111,6 +111,22 @@ export const trabajos: Trabajo[] = [
     ],
   },
   {
+    id: 'punta-eje-motor',
+    titulo: 'Punta de eje y chavetero de motor eléctrico',
+    linea: 'ECODUR REBUILD M',
+    resumen: 'Recuperación de la punta de eje y la zona de chavetero de un inducido, llevando el diámetro a medida OEM.',
+    detalles: [
+      'Restauración dimensional sin afectar el sustrato original',
+      'Mayor dureza que la pieza original',
+      'Mayor resistencia a la abrasión y a la corrosión',
+    ],
+    fotos: [
+      { src: '/img/punta-eje-antes.jpg', alt: 'Punta de eje y chavetero gastados, antes de la reparación' },
+      { src: '/img/punta-eje-chavetero.jpg', alt: 'Punta de eje y chavetero recuperados' },
+      { src: '/img/punta-eje-despues.jpg', alt: 'Punta de eje recuperada con ECODUR REBUILD M' },
+    ],
+  },
+  {
     id: 'inducido',
     titulo: 'Apoyos de inducido de 5000 kg',
     linea: 'ECODUR REBUILD M',
@@ -137,6 +153,15 @@ export const trabajos: Trabajo[] = [
       { src: '/img/yankee.jpg', alt: 'Cilindro Yankee' },
       { src: '/img/arco-spray.jpg', alt: 'Proyección térmica en marcha' },
     ],
+  },
+  {
+    id: 'rodillo-arrastre-wcco',
+    titulo: 'Rodillo de arrastre de 4 metros',
+    linea: 'WCCo as sprayed',
+    resumen: 'Restauración dimensional de un rodillo de arrastre de 4 m con carburo de tungsteno-cobalto, dejando la rugosidad del recubrimiento tal como se proyecta, según la especificación del cliente.',
+    detalles: ['Resistencia a la abrasión con rugosidad final controlada', 'Entre 3 y 5 veces la vida útil del componente'],
+    lecturas: [{ dato: 'Rugosidad final', valor: '13 µm ± 1 µm, certificada' }],
+    fotos: [{ src: '/img/rodillo-arrastre-wcco.jpg', alt: 'Rodillo de arrastre de 4 metros recubierto con WCCo, montado en el torno' }],
   },
   {
     id: 'cruceta-compresor',
